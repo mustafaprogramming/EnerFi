@@ -2,20 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+
+.triangle-gradient{
+ background: linear-gradient(to bottom right , #030A12 52% , transparent 48%);
+}
+.circle-border{
+ padding-top: 5rem;
+ border-radius: 50%/300px 300px  ;
+ border-top: 1px solid transparent;
+ background: linear-gradient(#030A12 0%, #030A12 2%, #030A12 10%) padding-box , linear-gradient(#0ae1068b 2%,#0ae1068b 2%,#000000 30%) border-box;
+}
+.circle{
+ border-top: 1px solid transparent;
+ border-radius: 50%;
+ background: conic-gradient(
+    from 0deg,
+    #0ae10668, 
+    rgba(0, 0, 0, 0) 60deg,   
+    rgba(0, 0, 0, 0) 110deg,  
+    #0ae10668 180deg,
+    rgba(0, 0, 0, 0)250deg,
+    rgba(0, 0, 0, 0) 300deg,  
+    #0ae10668 360deg 
+  ) border-box;
+}
+.circle-2{
+ border-top: 1px solid transparent;
+ border-radius: 50%;
+ background: conic-gradient(
+    from 0deg,
+    rgba(0, 0, 0, 0) ,   
+    rgba(0, 0, 0, 0) 35deg, 
+    #0ae10668 110deg,
+    rgba(0, 0, 0, 0) 140deg,  
+    rgba(0, 0, 0, 0) 220deg,
+    #0ae10668  300deg,  
+    rgba(0, 0, 0, 0) 325deg 
+  ) border-box;
+}
+.circle::before,.circle-2::before {
+ content: '';
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ width: 99.5%; 
+ height: 99.5%;
+ border-radius: 50%;
+ translate: -50% -50%;
+ background: #030A12;
+ z-index: 1;
+}
+@layer components {
+ .centered{
+  @apply -translate-x-[50%] -translate-y-[50%]
   }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
 }

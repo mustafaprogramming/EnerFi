@@ -7,6 +7,11 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        'xs': '480px',
+        'xl': '1200px',
+        '2xl': '1400px',
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
