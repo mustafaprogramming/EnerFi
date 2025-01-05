@@ -6,7 +6,7 @@ import AboutUs from './components/ui/AboutUs'
 import CardSection from './components/ui/CardSection'
 import { CircleCards } from './components/ui/Card'
 import FAQ from './components/ui/FAQ'
-import Work from './components/ui/Work'
+import Steps from './components/ui/Steps'
 
 const cardsArray = [
   {
@@ -87,14 +87,6 @@ export default function Home() {
             quality={100}
             className='rounded-lg bg-cover bg-center w-full h-full select-none '
           />
-          {/* Decorative Glow Element */}
-          <div
-            className='absolute w-[80%] h-[30px] left-[20%] rounded-full bg-[#0ae106] opacity-5'
-            style={{
-              boxShadow: '4px 4px 10px #0ae106',
-              transform: 'translateY(-50%) rotate(3deg)',
-            }}
-          ></div>
         </aside>
 
         {/* Right Section: Text Content and Button */}
@@ -115,7 +107,7 @@ export default function Home() {
         </div>
       </section>
       <AboutUs />
-      <Work />
+      <Steps />
       <CardSection array={cardsArray} />
       <section className='relative flex items-center justify-center mx-auto my-10 scale-95 h-[80vw] w-[80vw] max-h-[950px] max-w-[950px] '>
         {/* Logo Image */}

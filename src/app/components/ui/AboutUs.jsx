@@ -23,11 +23,6 @@ export default function AboutUs() {
         quality={100}
         className="rounded-lg bg-cover bg-center w-full select-none"
       />
-      {/* Decorative Element */}
-      <div
-        className="w-[60%] h-[5%] mx-auto rounded-[50%] bg-[#0AE106] opacity-10"
-        style={{ boxShadow: '4px 4px 10px #0AE106' }}
-      ></div>
     </aside>
   </section>
   

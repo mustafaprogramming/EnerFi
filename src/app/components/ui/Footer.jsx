@@ -9,7 +9,7 @@ import Title from './Title'
 
 export default function Footer() {
   return (
-    <footer className='circle-border sm:mt-32 mt-24'>
+    <footer className='circle-border sm:mt-32 mt-24 bg-[#030a12]'>
       <div className='flex flex-col items-center'>
         {/* Title Section */}
         <Title heading={['Powering The Future', 'Together']} />

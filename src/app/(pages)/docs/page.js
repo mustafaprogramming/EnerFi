@@ -6,7 +6,6 @@ import { documentations } from '@/app/data'
 import { FaAngleDoubleLeft } from 'react-icons/fa'
 import { IoMdClose } from 'react-icons/io'
 
-
 export default function Docs() {
   const [activeSection, setActiveSection] = useState('')
   const [height, setHeight] = useState(0)
@@ -14,12 +13,13 @@ export default function Docs() {
 
   const navigate = (id) => {
     const element = document.getElementById(id)
-    const yOffset = window.innerWidth > 640 ? 90 : 180;
-    const y = (element.getBoundingClientRect().top + window.scrollY)-yOffset // Calculate position
+    const yOffset = window.innerWidth > 640 ? 90 : 180
+    const y = element.getBoundingClientRect().top + window.scrollY - yOffset // Calculate position
     window.scrollTo({
       top: y,
       behavior: 'smooth',
     })
+    setActiveSection(id)
     setNavOpen(false)
   }
   const calculateHeight = () => {
@@ -29,26 +29,30 @@ export default function Docs() {
   useEffect(() => {
     calculateHeight()
     // Flatten the section IDs from the documentations array
-    const sectionElements = documentations
-      .flatMap((doc) => doc.sections) // Access all sections
-      .map((section) => document.getElementById(section.id)) // Get elements by ID
+    const timeout = setTimeout(() => {
+      const sectionElements = documentations
+        .flatMap((doc) => doc.sections) // Access all sections
+        .map((section) => document.getElementById(section.id)) // Get elements by ID
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleSection = entries.find((entry) => entry.isIntersecting)
-        if (visibleSection) {
-          setActiveSection(visibleSection.target.id)
-        }
-      },
-      { threshold: 1 } // Adjust threshold for when sections are considered "active"
-    )
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visibleSection = entries.find((entry) => entry.isIntersecting)
+          if (visibleSection) {
+            setActiveSection(visibleSection.target.id)
+          }
+        },
+        { threshold: 1 } // Adjust threshold for when sections are considered "active"
+      )
 
-    sectionElements.forEach((section) => {
-      if (section) observer.observe(section) // Observe only if the section exists
-    })
+      sectionElements.forEach((section) => {
+        if (section) observer.observe(section) // Observe only if the section exists
+      })
+      return () => observer.disconnect()
+    }, 100)
+
     window.addEventListener('resize', calculateHeight)
     return () => {
-      observer.disconnect()
+      clearTimeout(timeout)
       window.removeEventListener('resize', calculateHeight)
     }
   }, [documentations])
@@ -59,7 +63,10 @@ export default function Docs() {
       style={{ marginTop: `${height}px` }}
     >
       {/* Sidebar */}
-      <div className="absolute left-0 w-full h-[90vh] bg-[url('/Frame1.png')] bg-cover bg-no-repeat bg-center " style={{ top: `${height}px` }}></div>
+      <div
+        className="fixed left-0 w-full h-[90vh] bg-[url('/Frame1.png')] bg-cover bg-no-repeat bg-center z-[-10] "
+        style={{ top: `${height}px` }}
+      ></div>
       <nav
         className={` sm:sticky fixed ${
           navOpen
